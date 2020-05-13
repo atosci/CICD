@@ -29,7 +29,7 @@ kubectl apply -f sonar_service.yaml
 To be able to ue Docker from within the Jenkins Pipeline, a Docker in Docker (dind) container is needed. This runs a Docker daemon inside a Docker container. Create the dind container and create a service using expose:
 ```
 kubectl apply -f dind.yaml
-kubectl expose pod dind --name=dockerapp--port=2375 --target-port=2375
+kubectl expose pod dind --name=dockerapp --port=2375 --target-port=2375
 ```
 
 
