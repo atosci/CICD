@@ -29,9 +29,97 @@ kubectl apply -f sonar_service.yaml
 To be able to ue Docker from within the Jenkins Pipeline, a Docker in Docker (dind) container is needed. This runs a Docker daemon inside a Docker container. Create the dind container and create a service using expose:
 ```
 kubectl apply -f dind.yaml
-kubectl expose pod dind --name=dockerapp --port=2375 --target-port=2375
+kubectl expose pod dind --name=dockerapp--port=2375 --target-port=2375
 ```
 
+
+
+
+
+# Jenkins installation
+
+
+Jenkins is installed on a kubernetes cluster on Azure with kubernetes version 1.15.10.
+
+On this cluster, Jenkins is installed on a pod with the atosci/jenkinsdocker:v3 docker image.
+
+
+## Jenkins configuration
+
+Jenkins is configured with several plugins and different pipelines, we will go into this later on.
+
+
+
+# Plugins
+
+## Sonarqube scanner
+SonarQube Scanner for Jenkins is a plugin that has to be installed for the sonarqube webhook.
+The version currently used is: 4.3.0.2102. This is the latest version at the time of writing this.
+
+### Usage
+```
+ stage('Sonarqube analysis') {
+            environment {
+                    scannerHome = tool 'SonarQube Scanner'
+            }
+            steps {
+                withSonarQubeEnv('Sonarqube Service') {
+                    sh 'mvn clean package sonar:sonar'
+                }
+                timeout(time: 10, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+        
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+```
+
+
+## Kubernetes CLI plugin
+This plugin enables the use of kubectl within the pipeline. This is done with the following parameters in a pipeline:
+
+### Usage
+
+```groovy
+// 'Example when used in a pipeline'
+node {
+  stage('Apply Kubernetes files') {
+    withKubeConfig([credentialsId: 'user1', serverUrl: 'https://api.k8s.my-company.com']) {
+      sh 'kubectl apply -f my-kubernetes-directory'
+    }
+  }
+}
+```
+
+
+
+## Maven plugin
+Also maven needs to be installed automatically. This will be done with the Maven plugin that is included in the Jenkins installation. We can set this up to be automatically installed in the 'Jenkins-> global configuration' settings. Make sure to use the same version of Maven used inside the Java project.
+
+
+### Usage
+
+```groovy
+ tools {
+        maven 'Maven'
+    }
+    stages {
+        stage('Maven unit test') {
+            steps {
+                 sh 'mvn compile'
+                 sh 'mvn test'
+            }
+        }
+```
 
 
 
