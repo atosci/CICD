@@ -71,8 +71,8 @@ Check the box 'install Docker automatically' with the latest version.
 
 ## Github plugin
 
-#Pipelines
-To configure the Jenkins pipelines, we are using multibranch pipelines. 
+# Pipelines
+To configure the Jenkins pipelines, we are using multibranch pipelines. The advantage of this is that you have one project with multiple branches, and that all these branches can have its own Jenkinsfile to build, but still belong under one project within Jenkins.
 
 
 # Sonarqube configuration
