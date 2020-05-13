@@ -68,7 +68,7 @@ Also Maven needs to be installed automatically. This will be done with the Maven
 ## Docker plugin
 You also need to define the Docker installation in the global tool configuration of Jenkins.
 Check the box 'install Docker automatically' with the latest version.
-
+The credentials of dockerhub are also needed to make use of docker within the Jenkins pipeline. These can be configured in security-> configure credentials. Make sure to save the credentials ID and use this in the Jenkinsfile.
 
 # Pipelines
 To configure the Jenkins pipelines, we are using multibranch pipelines. The advantage of this is that you have one project with multiple branches, and that all these branches can have its own Jenkinsfile to build, but still belong under one project within Jenkins.
