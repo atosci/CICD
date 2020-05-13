@@ -100,7 +100,7 @@ Return to SonarQube to create the webhook
 Go to the administration page. Hit the arrow next to configuration and choose webhooks.
 Create a new webhook using the URL for Jenkins
 ```
-<jenkinsurl>/sonarqube-webhooks
+<jenkinsurl>/sonarqube-webhook/
 ```
 
 On the Quality Gates page, you can define your own standards for the code quality. But it is also possible to use the predefined ‘Sonar way’. 
