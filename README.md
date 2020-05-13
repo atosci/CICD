@@ -73,6 +73,10 @@ Check the box 'install Docker automatically' with the latest version.
 # Pipelines
 To configure the Jenkins pipelines, we are using multibranch pipelines. The advantage of this is that you have one project with multiple branches, and that all these branches can have its own Jenkinsfile to build, but still belong under one project within Jenkins.
 
+## Pipeline configuration
+-These pipelines must be configured to use the git credentials that have access to clone the destined repository. 
+-Select the option to use a Jenkinsfile in the multibranch configuration
+
 
 # Sonarqube configuration
 Find the external IP of Sonarqube with
