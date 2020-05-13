@@ -1,6 +1,6 @@
 # CI/CD
 
-<b>Kubernetes>
+<b>Kubernetes</b>
 
 The environment is built with containers, these are suitable to use with Kubernetes (k8s). Therefor you need to have access to an k8s environment. The deployment-files are only tested for the managed Azure Kubernetes Services.  All deployments can be done with the command “kubectl apply -f {filename} ”.
 There are three namespaces required. These are equal to the branches (develop, release and master) which are used to separate the applications environments. Jenkins automatically selects the proper namespace with the branch-pipeline. 
