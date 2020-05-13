@@ -2,14 +2,6 @@
 
 <b>Jenkins</b>
 
-Use the Dockerfile to create a Jenkins image on your container registry (Docker Hub). This image includes the ability to make use of Docker and Kubernetes commands inside the Jenkins container.
-```
-docker build -t <imagename> .
-docker image list
-docker tag <imageid> <hub-user>/<imagename>:<tag>
-docker push <hub-user>/<imagename>:<tag>
-```
-
 Before deploying the Jenkins container, create a persistent volume for this container with this command:
 ```
 kubectl apply -f persistent_vol_jenkins.yaml
