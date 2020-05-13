@@ -69,7 +69,6 @@ Also Maven needs to be installed automatically. This will be done with the Maven
 You also need to define the Docker installation in the global tool configuration of Jenkins.
 Check the box 'install Docker automatically' with the latest version.
 
-## Github plugin
 
 # Pipelines
 To configure the Jenkins pipelines, we are using multibranch pipelines. The advantage of this is that you have one project with multiple branches, and that all these branches can have its own Jenkinsfile to build, but still belong under one project within Jenkins.
