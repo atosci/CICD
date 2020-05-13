@@ -94,7 +94,8 @@ Then, search for ‘jacoco’. Install the JaCoCo XML report importer
 
 To connect SonarQube to Jenkins, a token and a webhook should be create.
 In order to create a token, click on the profile icon in the top right corner and select My Account. Select security, type a name in the input field and click generate. 
-Copy the security token and go into Jenkins -> configuration and configure the sonarqube servers with your URL and authentication token.
+Copy the security token and go into Jenkins -> credentials. Below credentials 'System' shows up, click here and next click 'Global credentials (unrestricted). In the left menu choose 'Add Credentials'. For 'Kind' select 'Secret text'. Paste the token in the 'Secret' field and give the credentials an ID. 
+When the credentials are added, go back to the Jenkins homepage and choose Manage Jenkins. Go to configure system and configure the sonarqube servers with your URL and authentication token.
 
 Return to SonarQube to create the webhook
 Go to the administration page. Hit the arrow next to configuration and choose webhooks.
