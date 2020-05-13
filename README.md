@@ -59,7 +59,7 @@ SonarQube Scanner for Jenkins is a plugin that has to be installed for the sonar
 The version currently used is: 4.3.0.2102. This is the latest version at the time of writing this.
 
 ## Kubernetes CLI plugin
-This plugin enables the use of kubectl within the pipeline. This is done with the following parameters in a pipeline:
+This plugin enables the use of kubectl within the pipeline. For this you also need to configure the credentials for kubernetes in the plugin settings. This can be done by creating a 'secret file' with the kube config. 
 
 
 ## Maven plugin
@@ -68,6 +68,12 @@ Also Maven needs to be installed automatically. This will be done with the Maven
 ## Docker plugin
 You also need to define the Docker installation in the global tool configuration of Jenkins.
 Check the box 'install Docker automatically' with the latest version.
+
+## Github plugin
+
+#Pipelines
+To configure the Jenkins pipelines, we are using multibranch pipelines. 
+
 
 # Sonarqube configuration
 Find the external IP of Sonarqube with
