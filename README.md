@@ -80,7 +80,7 @@ Find the external IP of Sonarqube with
 kubectl get svc
 ```
 
-In your browser, go to <external-IP>:9000
+In your browser, go to `<external-IP>:9000`
 
 You can login using
 ```
