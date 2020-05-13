@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarqube-dep
+  labels:
+    app: sonarq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarq
+  template:
+    metadata:
+      labels:
+        app: sonarq
+    spec:
+      securityContext:
+        fsGroup: 999
+      containers:
+      - name: sonarq
+        image: sonarqube
+        volumeMounts:
+        - mountPath: /opt/sonarqube/conf
+          name: sonarqvolume-conf
+          subPath: conf
+        - mountPath: /opt/sonarqube/data
+          name: sonarqvolume-data
+          subPath: data          
+        - mountPath: /opt/sonarqube/extensions
+          name: sonarqvolume-extensions                       
+          subPath: exstensions    
+        - mountPath: /opt/sonarqube/logs
+          name: sonarqvolume-logs                   
+          subPath: logs                    
+        ports:
+        - containerPort: 9000
+
+      volumes:
+       - name: sonarqvolume-conf
+         persistentVolumeClaim:
+          claimName: sonarq-volume-conf                   
+       - name: sonarqvolume-data
+         persistentVolumeClaim:
+          claimName: sonarq-volume-data
+       - name: sonarqvolume-extensions
+         persistentVolumeClaim:
+          claimName: sonarq-volume-extensions                  
+       - name: sonarqvolume-logs
+         persistentVolumeClaim:
+          claimName: sonarq-volume-logs 
