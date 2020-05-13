@@ -42,14 +42,6 @@ kubectl expose pod dind --name=dockerapp--port=2375 --target-port=2375
 
 
 
-# Jenkins installation
-
-
-Jenkins is installed on a kubernetes cluster on Azure with kubernetes version 1.15.10.
-
-On this cluster, Jenkins is installed on a pod with the atosci/jenkinsdocker:v3 docker image.
-
-
 ## Jenkins configuration
 
 Jenkins is configured with several plugins and different pipelines, we will go into this later on.
@@ -57,6 +49,10 @@ Jenkins is configured with several plugins and different pipelines, we will go i
 
 
 # Plugins
+
+
+## Java JDK
+Make sure to configure Jenkins to install the JDK automatically. This can be done under Jenkins -> global tool configuration
 
 ## Sonarqube scanner
 SonarQube Scanner for Jenkins is a plugin that has to be installed for the sonarqube webhook.
@@ -72,7 +68,6 @@ Also Maven needs to be installed automatically. This will be done with the Maven
 ## Docker plugin
 You also need to define the Docker installation in the global tool configuration of Jenkins.
 Check the box 'install Docker automatically' with the latest version.
-
 
 # Sonarqube configuration
 Find the external IP of Sonarqube with
