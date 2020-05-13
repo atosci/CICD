@@ -62,9 +62,6 @@ Jenkins is configured with several plugins and different pipelines, we will go i
 SonarQube Scanner for Jenkins is a plugin that has to be installed for the sonarqube webhook.
 The version currently used is: 4.3.0.2102. This is the latest version at the time of writing this.
 
-## Sonarqube servers
-Go into Jenkins -> configuration and configure the sonarqube servers with your URL and authentication token.
-
 ## Kubernetes CLI plugin
 This plugin enables the use of kubectl within the pipeline. This is done with the following parameters in a pipeline:
 
@@ -75,3 +72,38 @@ Also Maven needs to be installed automatically. This will be done with the Maven
 ## Docker plugin
 You also need to define the Docker installation in the global tool configuration of Jenkins.
 Check the box 'install Docker automatically' with the latest version.
+
+
+# Sonarqube configuration
+Find the external IP of Sonarqube with
+```
+kubectl get svc
+```
+
+In your browser, go to <external-IP>:9000
+
+You can login using
+```
+username: admin
+password: admin
+```
+
+Go to administration in the top menu and go to marketplace to install the Java and JaCoCo plugin.
+Scroll down and search for ‘java’. Install the Java Code Quality and Security (Code Analyzer for Java) 
+Then, search for ‘jacoco’. Install the JaCoCo XML report importer
+
+To connect SonarQube to Jenkins, a token and a webhook should be create.
+In order to create a token, click on the profile icon in the top right corner and select My Account. Select security, type a name in the input field and click generate. 
+Copy the security token and go into Jenkins -> configuration and configure the sonarqube servers with your URL and authentication token.
+
+Return to SonarQube to create the webhook
+Go to the administration page. Hit the arrow next to configuration and choose webhooks.
+Create a new webhook using the URL for Jenkins
+```
+<jenkinsurl>/sonarqube-webhooks
+```
+
+On the Quality Gates page, you can define your own standards for the code quality. But it is also possible to use the predefined ‘Sonar way’. 
+
+
+
